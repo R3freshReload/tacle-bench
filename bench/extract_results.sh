@@ -1,5 +1,5 @@
 #!/bin/bash
-#./checkBenchmark.sh
+./checkBenchmark.sh
 
 (cd res/platin
 ./collect.sh)
