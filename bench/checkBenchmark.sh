@@ -12,6 +12,7 @@ ARRAY_OPTIMIZATION=" -mllvm --mpatmos-enable-array-stack-cache-promotion"
 #EXEC= # Adapt if the executable is to be executed via another program
 #EXEC=valgrind\ -q
 EXEC="pasim -g 64m -m 32k -l 8k -s 1k --print-stats "
+PLATIN="platin wcet "
 
 PASS=0
 FAIL_COMP=0
@@ -42,6 +43,7 @@ for dir in */; do
         if [ -f a1.out ]; then
             $EXEC "${BENCH%/}"_main a1.out 2> noOpt_"${BENCH%/}".txt
             RETURNVALUE=$(echo $?)
+            $PLATIN -i a1.out.pml -b a1.out --report noOpt_"${BENCH%/}"_wcet.txt
             if [ $RETURNVALUE -eq 0 ]; then
                 printf "passed. \n"
                 ((PASS++))
@@ -67,6 +69,7 @@ for dir in */; do
        if [ -f a2.out ]; then
            $EXEC "${BENCH%/}"_main a2.out 2> opt_"${BENCH%/}".txt
            RETURNVALUE=$(echo $?)
+           $PLATIN -i a2.out.pml -b a2.out --report opt_"${BENCH%/}"_wcet.txt
            if [ $RETURNVALUE -eq 0 ]; then
                printf "passed. \n"
                ((PASS++))
@@ -93,6 +96,7 @@ for dir in */; do
         if [ -f a3.out ]; then
             $EXEC "${BENCH%/}"_main a3.out 2> arrayOpt_"${BENCH%/}".txt
             RETURNVALUE=$(echo $?)
+            $PLATIN -i a3.out.pml -b a3.out --report arrayOpt_"${BENCH%/}"_wcet.txt
             if [ $RETURNVALUE -eq 0 ]; then
                 printf "passed. \n"
                 ((PASS++))
