@@ -5,6 +5,8 @@ def process_directory_platin(directory, outputFile):
 
     for file in sorted(os.listdir(directory_path)):
         filename = os.fsdecode(file)
+        if not "_" in filename or not "." in filename:
+            continue
         testname = filename.split("_")[1]
         optName = filename.split("_")[0].capitalize()
         file_path = os.path.join(directory_path, filename)
@@ -32,6 +34,8 @@ def process_directory_pasim(directory, outputFile):
 
     for file in sorted(os.listdir(directory_path)):
         filename = os.fsdecode(file)
+        if not "_" in filename or not "." in filename:
+            continue
         testname = filename.split("_")[1].split(".")[0]
         optName = filename.split("_")[0].capitalize()
         file_path = os.path.join(directory_path, filename)

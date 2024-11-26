@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #COMPILER=gcc # Please adapt this line to your favorite compiler.
-#COMPILER=patmos-clang
-COMPILER=/Users/dan/t-crest/llvm-project/build_release/bin/clang
+COMPILER=patmos-clang
+#COMPILER=/Users/dan/t-crest/llvm-project/build_release/bin/clang
 
 
 OPTIONS=" -g -O2 -Wall -Wno-unknown-pragmas -Werror -mllvm --mpatmos-disable-function-splitter" 
@@ -12,7 +12,7 @@ ARRAY_OPTIMIZATION=" -mllvm --mpatmos-enable-array-stack-cache-promotion"
 #EXEC= # Adapt if the executable is to be executed via another program
 #EXEC=valgrind\ -q
 EXEC="pasim -g 64m -m 32k -l 8k -s 1k --print-stats "
-PLATIN="platin wcet "
+PLATIN="timeout -k 5s 1m platin wcet "
 
 PASS=0
 FAIL_COMP=0
